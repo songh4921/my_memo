@@ -43,7 +43,7 @@ const MemoEditor: React.FC = () => {
     }
     try {
       const response = await axios.post(
-        "http://localhost:3001/api/memo/upsert",
+        `${process.env.REACT_APP_API_URL}/api/memo/upsert`,
         { idp, title, content }
       );
       alert("작성이 되었습니다");

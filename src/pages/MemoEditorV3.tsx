@@ -33,7 +33,7 @@ const MemoEditorV3: React.FC = () => {
           return;
         }
         let res: any = await axios.get(
-          `http://localhost:3001/api/memo/get_memo_by_idp?idp=${idp}`
+          `${process.env.REACT_APP_API_URL}/api/memo/get_memo_by_idp?idp=${idp}`
         );
         res = res?.data;
 
@@ -73,7 +73,7 @@ const MemoEditorV3: React.FC = () => {
     }
     try {
       const response = await axios.post(
-        "http://localhost:3001/api/memo/upsert",
+        `${process.env.REACT_APP_API_URL}/api/memo/upsert`,
         { idp, title, content },
         {
           headers: {
@@ -112,7 +112,7 @@ const MemoEditorV3: React.FC = () => {
               const formData = new FormData();
               formData.append("image", blob);
 
-              const apiKey = "07c1e5d07ef4c497e700e5b7c041626912345a"; // ✅ 여기에 발급받은 API 키 입력
+              const apiKey = "07c1e5d07ef4c497e700e5b7c0416269"; // ✅ 여기에 발급받은 API 키 입력
               const res = await axios.post(
                 `https://api.imgbb.com/1/upload?key=${apiKey}`,
                 formData

@@ -13,8 +13,18 @@ const Register: React.FC = () => {
   const handleRegister = async () => {
     try {
       setError("");
+      if (!username?.trim() || !password?.trim() || !repassword?.trim()) {
+        setError(`입력란을 모두 입력하세요`);
+        alert(`입력란을 모두 입력하세요`);
+        return;
+      }
+      if (password?.trim() != repassword?.trim()) {
+        setError(`비밀번호가 서로 틀려요`);
+        alert(`비밀번호가 서로 틀려요`);
+        return;
+      }
       let response: any = await axios.post(
-        `${process.env.REACT_APP_API_URL}/api/auth/validate`,
+        `${process.env.REACT_APP_API_URL}/api/auth/register`,
         {
           username,
           password,
@@ -71,7 +81,7 @@ const Register: React.FC = () => {
         <div className="mb-6">
           <label className="block text-gray-700 mb-2">비밀번호</label>
           <input
-            type="repassword"
+            type="password"
             className="w-full border border-gray-300 rounded px-3 py-2"
             value={repassword}
             onChange={(e) => setRepassword(e.target.value)}
